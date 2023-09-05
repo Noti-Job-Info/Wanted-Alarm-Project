@@ -1,7 +1,10 @@
 from config.settings.base import *
+import ast
+import pymysql
 
 if SERVER_ENV == "dev":
     ALLOWED_HOSTS = ["*"]
+    # ALLOWED_HOSTS = ['15.165.160.175', 'localhost', '127.0.0.1']
 
     DEBUG = True
 
