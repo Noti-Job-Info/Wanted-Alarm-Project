@@ -1,40 +1,42 @@
-# name: CI
+name: CI
 
-# on:
-#   push:
-#     branches: [ "develop", "main"]
+on:
+  push:
+    branches: [ "test" ]  # github branch
 
-#   pull_request:
-#     branches: [ "develop", "main" ]
+  pull_request:
+    branches: [ "test" ]  # github branch
 
-# jobs:
-#   test:
+jobs:
+  test:
 
-#     runs-on: ubuntu-latest
-#     strategy:
-#       max-parallel: 4
-#       matrix:
-#         python-version: [3.11.4]
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.11]
 
-#     steps:
-#     - uses: actions/checkout@v3
-#     - name: Set up Python ${{ matrix.python-version }}
-#       uses: actions/setup-python@v3
-#       with:
-#         python-version: ${{ matrix.python-version }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
 
-#     - name: Install Poetry
-#       run: |
-#         curl -sSL https://install.python-poetry.org | python -
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python -
 
-#     - name: Install Dependencies
-#       run: |
-#         poetry install --no-root
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install poetry
+        poetry install --no-root
 
-#     - name: Run Tests
-#       env:
-#         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-#         SERVER_ENV: ${{ secrets.SERVER_ENV }}
-#         IS_LOCAL_DATABASE: ${{ secrets.IS_LOCAL_DATABASE }}
-#       run: |
-#         poetry run python manage.py test
+    - name: Run Tests
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DEBUG: ${{ secrets.DJANGO_DEBUG }}
+        MYSQL_DB: ${{ secrets.MYSQL_DB }}
+      run: |
+        poetry run python manage.py test
