@@ -66,7 +66,9 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
 ]
 
-CUSTOM_APPS = []
+CUSTOM_APPS = [
+    "accounts",
+]
 
 INSTALLED_APPS = SYSTEM_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
 
@@ -108,6 +110,10 @@ STATIC_ROOT = "static"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+# Auth Settings
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Default primary key field type
