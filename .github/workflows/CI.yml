@@ -36,6 +36,7 @@ jobs:
     - name: Run Tests
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        SERVER_ENV: ${{ secrets.SERVER_ENV }}
         DEBUG: ${{ secrets.DJANGO_DEBUG }}
         MYSQL_DB: ${{ secrets.MYSQL_DB }}
       run: |
