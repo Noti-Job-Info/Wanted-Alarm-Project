@@ -42,6 +42,7 @@ urlpatterns += [
     # Admin
     path("admin/", admin.site.urls),
     # API V1
+    path('api/v1/account/', include('accounts.urls')),
 ]
 
 
