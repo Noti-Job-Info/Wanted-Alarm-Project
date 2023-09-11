@@ -55,7 +55,7 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_BLUE_REPO }}
         labels: latest
-   
+
   ec2-deploy:
     needs: docker-build
     runs-on: ubuntu-latest
